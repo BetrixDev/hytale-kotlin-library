@@ -4,6 +4,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+bin/
 
 # IDE
 .idea/
@@ -30,3 +31,16 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Node.js
+node_modules
+docs/.vitepress/dist
+docs/.vitepress/cache
+
+# Misc
+hytale-decompiled
+
+#Eclips
+.classpath
+.project
+.settings
