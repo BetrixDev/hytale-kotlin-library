@@ -41,7 +41,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/betrix/hytale-kotlin-library' }
+      { icon: 'github', link: 'https://github.com/BetrixDev/hytale-kotlin-library' }
     ],
 
     search: {
@@ -49,8 +49,8 @@ export default defineConfig({
     },
 
     footer: {
-      message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2024 Betrix'
+      message: 'MIT License.',
+      copyright: 'Copyright © 2026 BetrixDev'
     }
   }
 })
