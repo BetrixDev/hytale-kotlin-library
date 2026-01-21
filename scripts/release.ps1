@@ -116,7 +116,7 @@ $releaseNotes = @"
 
 Add the JitPack repository and dependency to your build.gradle.kts:
 
-```kotlin
+``````kotlin
 repositories {
     mavenCentral()
     maven("https://jitpack.io")
@@ -125,11 +125,11 @@ repositories {
 dependencies {
     implementation("com.github.BetrixDev:hytale-kotlin-library:$tagName")
 }
-```
+``````
 
 Or with Gradle Groovy DSL:
 
-```groovy
+``````groovy
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
@@ -138,11 +138,11 @@ repositories {
 dependencies {
     implementation 'com.github.BetrixDev:hytale-kotlin-library:$tagName'
 }
-```
+``````
 
 Or with Maven:
 
-```xml
+``````xml
 <repository>
     <id>jitpack.io</id>
     <url>https://jitpack.io</url>
@@ -153,7 +153,7 @@ Or with Maven:
     <artifactId>hytale-kotlin-library</artifactId>
     <version>$tagName</version>
 </dependency>
-```
+``````
 
 ### Assets
 - hytale-kotlin-library-$Version.jar - Main library
