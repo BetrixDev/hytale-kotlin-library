@@ -2,6 +2,9 @@
 
 [![](https://jitpack.io/v/BetrixDev/hytale-kotlin-library.svg)](https://jitpack.io/#BetrixDev/hytale-kotlin-library)
 
+> [!CAUTION]
+> This library is a proof-of-concept more than anything and hasn't been tested.
+
 Kotlin extensions and DSLs for Hytale server plugin development. Reduce boilerplate, increase type safety, and write cleaner server plugins.
 
 ## Installation
@@ -86,8 +89,7 @@ class MyPlugin : JavaPlugin() {
 
 ## Documentation
 
-Full documentation available at the [docs site](https://betrixdev.github.io/hytale-kotlin-library/).
-
+Full documentation available at the [docs site](https://hytale-kotlin-library.vercel.app)
 ## License
 
 MIT
