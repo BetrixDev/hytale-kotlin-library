@@ -108,24 +108,24 @@ git push origin $tagName
 # Create GitHub release using gh CLI
 Write-Step "Creating GitHub release..."
 
-# Build release notes
+# Build release notes (use single quotes to avoid backtick issues)
 $releaseNotes = @"
 ## Hytale Kotlin Library $Version
 
 ### Installation
 
-Add to your `build.gradle.kts`:
+Add to your build.gradle.kts:
 
-``````kotlin
+```kotlin
 dependencies {
     implementation("dev.betrix.hytale.kotlin:hytale-kotlin-library:$Version")
 }
-``````
+```
 
 ### Assets
-- `hytale-kotlin-library-$Version.jar` - Main library
-- `hytale-kotlin-library-$Version-sources.jar` - Source code
-- `hytale-kotlin-library-$Version-javadoc.jar` - Documentation
+- hytale-kotlin-library-$Version.jar - Main library
+- hytale-kotlin-library-$Version-sources.jar - Source code
+- hytale-kotlin-library-$Version-javadoc.jar - Documentation
 "@
 
 # Collect all JARs to upload
@@ -134,12 +134,16 @@ if (Test-Path $jarPath) { $assets += $jarPath }
 if (Test-Path $sourcesJarPath) { $assets += $sourcesJarPath }
 if (Test-Path $javadocJarPath) { $assets += $javadocJarPath }
 
-$assetArgs = $assets | ForEach-Object { "`"$_`"" }
+# Use array splatting to pass arguments properly
+$ghArgs = @(
+    "release", "create", $tagName,
+    "--title", $tagName,
+    "--notes", $releaseNotes
+)
+$ghArgs += $assets
 
-$ghCommand = "gh release create `"$tagName`" --title `"$tagName`" --notes `"$releaseNotes`" $($assetArgs -join ' ')"
-
-Write-Host "Executing: $ghCommand" -ForegroundColor Gray
-Invoke-Expression $ghCommand
+Write-Host "Creating release with $($assets.Count) assets..." -ForegroundColor Gray
+& gh @ghArgs
 
 if ($LASTEXITCODE -ne 0) {
     throw "Failed to create GitHub release"
