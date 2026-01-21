@@ -112,14 +112,47 @@ Write-Step "Creating GitHub release..."
 $releaseNotes = @"
 ## Hytale Kotlin Library $Version
 
-### Installation
+### Installation via JitPack
 
-Add to your build.gradle.kts:
+Add the JitPack repository and dependency to your build.gradle.kts:
 
 ```kotlin
-dependencies {
-    implementation("dev.betrix.hytale.kotlin:hytale-kotlin-library:$Version")
+repositories {
+    mavenCentral()
+    maven("https://jitpack.io")
 }
+
+dependencies {
+    implementation("com.github.BetrixDev:hytale-kotlin-library:$tagName")
+}
+```
+
+Or with Gradle Groovy DSL:
+
+```groovy
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.BetrixDev:hytale-kotlin-library:$tagName'
+}
+```
+
+Or with Maven:
+
+```xml
+<repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+</repository>
+
+<dependency>
+    <groupId>com.github.BetrixDev</groupId>
+    <artifactId>hytale-kotlin-library</artifactId>
+    <version>$tagName</version>
+</dependency>
 ```
 
 ### Assets

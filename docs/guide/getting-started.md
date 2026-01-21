@@ -10,15 +10,55 @@ This guide will walk you through setting up and using the Hytale Kotlin Library 
 
 ## Installation
 
+[![](https://jitpack.io/v/BetrixDev/hytale-kotlin-library.svg)](https://jitpack.io/#BetrixDev/hytale-kotlin-library)
+
 ### Gradle (Kotlin DSL)
 
-Add the library to your `build.gradle.kts`:
+Add the JitPack repository and dependency to your `build.gradle.kts`:
 
 ```kotlin
+repositories {
+    mavenCentral()
+    maven("https://jitpack.io")
+}
+
 dependencies {
-    implementation("dev.betrix.hytale.kotlin:hytale-kotlin-library:0.1.0")
+    implementation("com.github.BetrixDev:hytale-kotlin-library:v0.1.0")
     compileOnly(files("path/to/HytaleServer.jar"))
 }
+```
+
+### Gradle (Groovy DSL)
+
+```groovy
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.BetrixDev:hytale-kotlin-library:v0.1.0'
+    compileOnly files('path/to/HytaleServer.jar')
+}
+```
+
+### Maven
+
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <dependency>
+        <groupId>com.github.BetrixDev</groupId>
+        <artifactId>hytale-kotlin-library</artifactId>
+        <version>v0.1.0</version>
+    </dependency>
+</dependencies>
 ```
 
 The library automatically locates your Hytale installation, but you can override it:
