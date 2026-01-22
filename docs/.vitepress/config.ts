@@ -26,6 +26,7 @@ export default defineConfig({
             { text: 'Commands', link: '/guide/commands' },
             { text: 'ECS (Entities)', link: '/guide/ecs' },
             { text: 'Events', link: '/guide/events' },
+            { text: 'Items', link: '/guide/items' },
             { text: 'UI', link: '/guide/ui' }
           ]
         }
