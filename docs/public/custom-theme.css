@@ -1,0 +1,169 @@
+:root {
+  --vp-c-brand-1: #a855f7;
+  --vp-c-brand-2: #9333ea;
+  --vp-c-brand-3: #7c3aed;
+  --vp-c-brand-soft: rgba(168, 85, 247, 0.15);
+  --vp-c-brand-tonal: rgba(168, 85, 247, 0.25);
+  --vp-c-brand-delta: rgba(168, 85, 247, 0.4);
+
+  --vp-c-brand-light: #c084fc;
+  --vp-c-brand-lighter: #d8b4fe;
+  --vp-c-brand-dark: #7c3aed;
+  --vp-c-brand-darker: #6b21a8;
+
+  --vp-c-tip-1: #a855f7;
+  --vp-c-tip-2: #9333ea;
+  --vp-c-tip-3: #7c3aed;
+  --vp-c-tip-soft: rgba(168, 85, 247, 0.15);
+  --vp-c-tip-bg: rgba(168, 85, 247, 0.05);
+  --vp-c-tip-bg-soft: rgba(168, 85, 247, 0.1);
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #a855f7, #c084fc, #d8b4fe);
+}
+
+.dark {
+  --vp-c-bg: #0d0d14 !important;
+  --vp-c-bg-soft: #1a1a24 !important;
+  --vp-c-bg-soft-up: #242430 !important;
+  --vp-c-bg-mute: #1a1a24 !important;
+  --vp-c-bg-alt: #0a0a0f !important;
+  --vp-c-bg-elv: #14141c !important;
+
+  --vp-c-bg-alpha: rgba(13, 13, 20, 0.8) !important;
+  --vp-c-bg-alpha-backdrop: rgba(26, 26, 36, 0.8) !important;
+
+  --vp-c-bg-soft-out: #1a1a24 !important;
+
+  --vp-c-black: #000000;
+  --vp-c-black-pure: #000000;
+  --vp-c-black-soft: #14141c;
+  --vp-c-black-mute: #0a0a0f;
+
+  --vp-c-white: #e4e4e7;
+  --vp-c-white-soft: #d4d4d8;
+  --vp-c-white-mute: #a1a1aa;
+  --vp-c-white-soft-muted: #71717a;
+
+  --vp-c-gray-1: #71717a;
+  --vp-c-gray-2: #a1a1aa;
+  --vp-c-gray-3: #d4d4d8;
+  --vp-c-gray-soft-1: #1a1a24;
+  --vp-c-gray-soft-2: #242430;
+  --vp-c-gray-soft-3: #2e2e3c;
+
+  --vp-c-divider-light: #242430;
+  --vp-c-divider-light-1: #2e2e3c;
+  --vp-c-divider-dark: #242430;
+  --vp-c-divider-dark-1: #2e2e3c;
+  --vp-c-divider: #242430;
+
+  --vp-c-warning-1: #f59e0b;
+  --vp-c-warning-2: #d97706;
+  --vp-c-warning-3: #b45309;
+  --vp-c-warning-soft: rgba(245, 158, 11, 0.15);
+
+  --vp-c-danger-1: #ef4444;
+  --vp-c-danger-2: #dc2626;
+  --vp-c-danger-3: #b91c1c;
+  --vp-c-danger-soft: rgba(239, 68, 68, 0.15);
+
+  --vp-c-success-1: #10b981;
+  --vp-c-success-2: #059669;
+  --vp-c-success-3: #047857;
+  --vp-c-success-soft: rgba(16, 185, 129, 0.15);
+
+  --vp-shadow-1: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --vp-shadow-2: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --vp-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.6);
+
+  --vp-button-brand-bg: #9333ea;
+  --vp-button-brand-bg-hover: #7c3aed;
+  --vp-button-brand-bg-active: #6b21a8;
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-border: #7c3aed;
+  --vp-button-brand-border-hover: #6b21a8;
+  --vp-button-brand-border-active: #581c87;
+
+  --vp-button-alt-bg: #242430;
+  --vp-button-alt-bg-hover: #2e2e3c;
+  --vp-button-alt-bg-active: #383850;
+  --vp-button-alt-text: #e4e4e7;
+  --vp-button-alt-border: #2e2e3c;
+  --vp-button-alt-border-hover: #383850;
+  --vp-button-alt-border-active: #4a4a5e;
+
+  --vp-button-sponsor-bg: #c084fc;
+  --vp-button-sponsor-bg-hover: #d8b4fe;
+  --vp-button-sponsor-text: #0d0d14;
+
+  --vp-local-search-highlight: #c084fc;
+
+  --vp-carbon-ads-bg: #14141c;
+  --vp-carbon-ads-text: #d4d4d8;
+  --vp-carbon-ads-cta-text: #a855f7;
+  --vp-carbon-ads-cta-bg: rgba(168, 85, 247, 0.15);
+}
+
+.VPSwitch {
+  background: var(--vp-c-bg-soft);
+}
+
+.VPSwitch:hover {
+  background: var(--vp-c-bg-soft-up);
+}
+
+.VPSDocSearchButton {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+}
+
+.VPSDocSearchButton:hover {
+  border-color: var(--vp-c-brand-1);
+}
+
+.VPNav {
+  background: var(--vp-c-bg-alpha);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.VPSidebar {
+  background: var(--vp-c-bg);
+  border-right: 1px solid var(--vp-c-divider);
+}
+
+.VPDoc {
+  border-left: 1px solid var(--vp-c-divider);
+}
+
+.custom-block.tip {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-tip-bg);
+}
+
+.custom-block.warning {
+  border-color: var(--vp-c-warning-1);
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.custom-block.danger {
+  border-color: var(--vp-c-danger-1);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.custom-block a {
+  color: var(--vp-c-brand-light);
+}
+
+code {
+  color: var(--vp-c-brand-1);
+}
+
+a {
+  color: var(--vp-c-brand-1);
+}
+
+a:hover {
+  color: var(--vp-c-brand-lighter);
+}

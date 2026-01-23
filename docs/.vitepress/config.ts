@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Hytale Kotlin Library",
   description: "Kotlin extensions and DSLs for Hytale server plugin development",
+  appearance: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -53,5 +54,9 @@ export default defineConfig({
       message: 'MIT License',
       copyright: 'Copyright © 2026 BetrixDev'
     }
-  }
+  },
+
+  head: [
+    ['link', { rel: 'stylesheet', href: '/custom-theme.css' }]
+  ]
 })
