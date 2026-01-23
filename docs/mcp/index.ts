@@ -131,6 +131,9 @@ Bun.serve({
       }
       return transports[sessionId].handlePostMessage(req);
     },
+    "/health": () => {
+      return new Response("OK", { status: 200 });
+    },
   },
   fetch() {
     return new Response("Not Found", { status: 404 });
