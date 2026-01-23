@@ -126,6 +126,47 @@ class MySystem : TypedEntitySystem<ComponentA, ComponentB>()
 
 ---
 
+## Interactions
+
+**Package:** `dev.betrix.hytale.kotlin.interaction`
+
+### Interaction Builders
+
+| Builder | Description |
+|---------|-------------|
+| `simpleInteraction(id, block)` | Build a simple interaction |
+| `serialInteraction(id, block)` | Build a serial interaction chain |
+| `parallelInteraction(id, block)` | Build parallel root interactions |
+| `repeatInteraction(id, block)` | Build a repeating fork interaction |
+| `rootInteraction(id, block)` | Build a root interaction entry point |
+
+### Support Builders
+
+| Builder | Description |
+|---------|-------------|
+| `interactionCooldown(block)` | Build an `InteractionCooldown` |
+| `interactionSettings(block)` | Build per-gamemode `InteractionSettings` |
+| `rootInteractionSettings(block)` | Build `RootInteractionSettings` |
+| `interactionRules(block)` | Build `InteractionRules` |
+| `interactionEffects(block)` | Build `InteractionEffects` |
+| `interactionCameraSettings(block)` | Build `InteractionCameraSettings` |
+
+### Components
+
+| Builder | Description |
+|---------|-------------|
+| `interactions(block)` | Build an `Interactions` component mapping |
+
+### Handlers
+
+| API | Description |
+|-----|-------------|
+| `registerInteractionHandlers(block)` | Register interaction event handlers with custom logic |
+| `InteractionHandlerContext.startRoot(id)` | Start a root interaction from a handler |
+| `InteractionHandlerContext.startDefaultRoot()` | Start the default root for the item/entity |
+
+---
+
 ## UI - Pages
 
 **Package:** `dev.betrix.hytale.kotlin.ui.pages`
