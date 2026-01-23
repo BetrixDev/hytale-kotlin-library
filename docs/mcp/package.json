@@ -1,0 +1,22 @@
+{
+  "name": "mcp",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "scripts": {
+    "start": "bun run index.ts"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.3",
+    "bun-mcp-sse-transport": "github:tigranbs/bun-mcp-sse-transport",
+    "fastest-levenshtein": "^1.0.16",
+    "gray-matter": "^4.0.3",
+    "zod": "^4.3.6"
+  }
+}

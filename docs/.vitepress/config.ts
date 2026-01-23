@@ -53,7 +53,7 @@ export default defineConfig({
 
     footer: {
       message: 'MIT License',
-      copyright: 'Copyright © 2026 BetrixDev'
+      copyright: `Copyright © ${new Date().getFullYear()} BetrixDev`
     }
   },
 

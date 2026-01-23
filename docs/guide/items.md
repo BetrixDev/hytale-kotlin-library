@@ -1,3 +1,8 @@
+---
+title: Item Stack Creation and Inventory Management
+description: Kotlin DSLs and extensions for working with Hytale's item system
+---
+
 # Items
 
 The items module provides Kotlin DSLs and extensions for working with Hytale's item system. This includes creating item stacks, modifying items immutably, and manipulating inventories.

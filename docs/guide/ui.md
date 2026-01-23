@@ -1,3 +1,8 @@
+---
+title: UI Page Events and HUD Extensions
+description: Kotlin extensions for working with Hytale's page event bindings
+---
+
 # UI
 
 The UI module provides Kotlin extensions for working with Hytale's page event bindings, simplifying how you wire up UI interactions.

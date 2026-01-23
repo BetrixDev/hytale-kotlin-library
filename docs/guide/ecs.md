@@ -1,3 +1,8 @@
+---
+title: ECS Components, Systems, and Queries
+description: Kotlin extensions for Hytale's Entity-Component-System architecture
+---
+
 # Entity-Component-System (ECS)
 
 The ECS module provides Kotlin extensions for Hytale's Entity-Component-System architecture. This is the core of how entities, their data, and their behavior are managed in Hytale.

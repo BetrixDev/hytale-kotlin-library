@@ -1,3 +1,8 @@
+---
+title: Player Command DSL and Argument Handling
+description: Kotlin DSLs for building and registering player commands
+---
+
 # Commands
 
 The commands module provides Kotlin DSLs for building and registering player commands with significantly less boilerplate than the raw Hytale API.

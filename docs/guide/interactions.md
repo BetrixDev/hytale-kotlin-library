@@ -1,3 +1,8 @@
+---
+title: Hytale Interaction Assets and Handlers
+description: Kotlin DSLs for building Hytale interaction assets and assigning them to entities
+---
+
 # Interactions
 
 The interactions module provides Kotlin DSLs for building Hytale interaction assets and assigning them to entities. This wraps the server interaction configuration classes with a more fluent, type-safe builder API.

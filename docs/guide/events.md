@@ -1,3 +1,8 @@
+---
+title: Event Registration and Handling
+description: Kotlin extensions for registering event handlers with type inference
+---
+
 # Events
 
 The events module provides Kotlin extensions for registering event handlers with type inference, eliminating the need to pass class references explicitly.
