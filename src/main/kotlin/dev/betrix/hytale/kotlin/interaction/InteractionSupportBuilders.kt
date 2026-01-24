@@ -127,20 +127,20 @@ public class InteractionEffectsBuilder {
     public var movementEffects: MovementEffects? = null
     public var startDelay: Float? = null
 
-    public fun particles(vararg values: ModelParticle) {
-        particles = values
+public fun particles(vararg values: ModelParticle) {
+        particles = values.asList().toTypedArray()
     }
 
     public fun firstPersonParticles(vararg values: ModelParticle) {
-        firstPersonParticles = values
+        firstPersonParticles = values.asList().toTypedArray()
     }
 
     public fun trails(vararg values: com.hypixel.hytale.protocol.ModelTrail) {
-        trails = values
+        trails = values.asList().toTypedArray()
     }
 
     public fun build(): InteractionEffects {
-        val effects = InteractionEffects()
+        val effects = InteractionEffects::class.java.getDeclaredConstructor().apply { isAccessible = true }.newInstance()
         particles?.let { effects.setFieldValue("particles", it) }
         firstPersonParticles?.let { effects.setFieldValue("firstPersonParticles", it) }
         worldSoundEventId?.let { effects.setFieldValue("worldSoundEventId", it) }

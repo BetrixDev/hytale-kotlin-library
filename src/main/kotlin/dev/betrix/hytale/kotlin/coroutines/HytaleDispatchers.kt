@@ -1,5 +1,3 @@
-@file:JvmName("HytaleDispatchers")
-
 package dev.betrix.hytale.kotlin.coroutines
 
 import com.hypixel.hytale.server.core.HytaleServer

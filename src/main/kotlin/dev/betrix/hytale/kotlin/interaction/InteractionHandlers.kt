@@ -119,12 +119,13 @@ internal data class InteractionHandler(
     val handler: InteractionHandlerContext.() -> Unit
 )
 
+@Suppress("UNCHECKED_CAST")
 public fun JavaPlugin.registerInteractionHandlers(
     block: InteractionHandlerScope.() -> Unit
-): com.hypixel.hytale.event.EventRegistration<Void, PlayerInteractEvent> {
+): com.hypixel.hytale.event.EventRegistration<*, *> {
     val handlers = InteractionHandlerScope().apply(block).build()
-    return registerEvent<PlayerInteractEvent> { event ->
-        val context = InteractionHandlerContext(event)
+    return eventRegistry.register(PlayerInteractEvent::class.java) { event ->
+        val context = InteractionHandlerContext(event as PlayerInteractEvent)
         for (handler in handlers) {
             val matches = handler.types?.contains(context.type) ?: true
             if (!matches || !handler.predicate(context)) {
@@ -135,5 +136,5 @@ public fun JavaPlugin.registerInteractionHandlers(
                 break
             }
         }
-    }
+    }!!
 }
