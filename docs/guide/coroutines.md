@@ -10,6 +10,7 @@ The Hytale Kotlin Library provides first-class coroutine support, making it easy
 ## Overview
 
 Hytale servers have specific threading requirements:
+
 - **World Thread**: Each world runs on its own thread. Entity and block modifications must happen here.
 - **Background Threads**: For I/O, computation, and other non-world operations.
 - **Scheduled Executor**: Hytale's built-in single-threaded scheduler for timed tasks.
@@ -23,7 +24,7 @@ import dev.betrix.hytale.kotlin.coroutines.*
 import kotlin.time.Duration.Companion.seconds
 
 class MyPlugin : JavaPlugin() {
-    
+
     override fun onLoad() {
         // Launch a coroutine tied to plugin lifecycle
         launch {
@@ -33,7 +34,7 @@ class MyPlugin : JavaPlugin() {
             }
         }
     }
-    
+
     override fun onDisable() {
         cancelPluginScope() // Cancel all plugin coroutines
     }
@@ -77,7 +78,7 @@ val worldDispatcher = world.dispatcher
 // Use with withContext
 launch(HytaleDispatchers.io) {
     val data = loadFromDatabase()
-    withContext(world.dispatcher) {
+    withContext(worldDispatcher) {
         // Now on world thread - safe to modify entities
         player.applyData(data)
     }
@@ -106,13 +107,13 @@ Switch to the world thread from any coroutine context:
 ```kotlin
 launchIO {
     val savedData = loadPlayerData(playerId)
-    
+
     world.withWorld {
         // Switched to world thread
         player.inventory.apply(savedData.inventory)
         player.teleport(savedData.position)
     }
-    
+
     // Back on IO dispatcher
     logPlayerLoad(playerId)
 }
@@ -149,7 +150,7 @@ Every plugin has a `pluginScope` that automatically manages coroutine lifecycle:
 
 ```kotlin
 class MyPlugin : JavaPlugin() {
-    
+
     override fun onLoad() {
         // Coroutines launched here are tied to plugin lifecycle
         pluginScope.launch {
@@ -159,7 +160,7 @@ class MyPlugin : JavaPlugin() {
             }
         }
     }
-    
+
     override fun onDisable() {
         // Cancel all coroutines when plugin is disabled
         cancelPluginScope()
@@ -268,7 +269,7 @@ world.launch {
 launchIO {
     val playerData = database.loadPlayer(playerId)
     val inventory = database.loadInventory(playerId)
-    
+
     world.withWorld {
         player.apply {
             applyStats(playerData)
@@ -285,10 +286,10 @@ launchIO {
 override fun onLoad() {
     launch {
         while (isActive) {
-            launchIO { 
-                saveAllPlayerData() 
+            launchIO {
+                saveAllPlayerData()
             }.join() // Wait for save to complete
-            
+
             delay(5.minutes)
         }
     }
@@ -321,7 +322,7 @@ launchIO {
     val playerData = async { database.loadPlayer(playerId) }
     val guildData = async { database.loadGuild(guildId) }
     val achievements = async { database.loadAchievements(playerId) }
-    
+
     // Wait for all and apply on world thread
     world.withWorld {
         player.apply {
@@ -350,6 +351,93 @@ suspend fun processEntitiesInBatches(entities: List<Entity>, batchSize: Int = 10
 }
 ```
 
+### Async Player Join with Ban Check
+
+Check if a player is banned from an external API before allowing them to join, without blocking other server operations:
+
+```kotlin
+// Fake ban check API (replace with your actual API)
+object BanApi {
+    suspend fun isPlayerBanned(uuid: UUID): Boolean {
+        // Simulate external API call
+        delay(500.milliseconds)
+        // Your actual ban check logic here
+        return false
+    }
+}
+
+// Handle player connection event
+override fun onLoad() {
+    // Register for PlayerConnectEvent
+    registerEvent<PlayerConnectEvent> { event ->
+        val playerRef = event.playerRef
+        val playerUuid = playerRef.uuid
+
+        // Launch coroutine to check ban status asynchronously
+        // This doesn't block the event handler or any other threads
+        launch {
+            try {
+                withTimeout(10.seconds) {
+                    // Check ban status on IO dispatcher (network)
+                    val isBanned = withContext(HytaleDispatchers.io) {
+                        BanApi.isPlayerBanned(playerUuid)
+                    }
+
+                    if (isBanned) {
+                        // Player is banned - kick them
+                        // Note: You'll need to implement the kick logic
+                        // based on Hytale's actual API
+                        kickPlayer(playerRef, "You are banned from this server")
+                        logger.info("Blocked banned player: ${playerRef.username}")
+                    } else {
+                        // Player is not banned - allow entry
+                        // Load their data asynchronously
+                        val playerData = withContext(HytaleDispatchers.io) {
+                            loadPlayerData(playerUuid)
+                        }
+                        
+                        world.withWorld {
+                            // Apply player data once they enter the world
+                            applyPlayerData(playerRef, playerData)
+                        }
+                    }
+                }
+            } catch (e: TimeoutCancellationException) {
+                logger.warning("Ban check timed out for ${playerRef.username}, allowing join")
+            } catch (e: Exception) {
+                logger.warning("Error checking ban status: ${e.message}")
+            }
+        }
+    }
+}
+
+suspend fun kickPlayer(playerRef: PlayerRef, reason: String) {
+    // TODO: Implement actual kick logic using Hytale's API
+    // The exact API depends on Hytale's implementation
+    // This would typically involve disconnecting the player session
+    
+    // Placeholder for the actual implementation
+    logger.info("Kicking ${playerRef.username}: $reason")
+}
+```
+
+**Why this doesn't block:**
+
+- The event handler returns immediately after launching the coroutine
+- The ban check runs on `HytaleDispatchers.io` (separate thread from world/main thread)
+- Other players can join and other server operations continue normally
+- Only when the async check completes is the player kicked or allowed through
+
+**The flow:**
+
+1. Player connects → `PlayerConnectEvent` fires
+2. Event handler launches coroutine and returns immediately
+3. Server continues processing other players/events
+4. Coroutine checks ban status in background (non-blocking)
+5. After check completes, player is either kicked or allowed to proceed
+
+This pattern ensures that slow external API calls don't slow down the server's overall performance.
+
 ## Best Practices
 
 ### 1. Always Cancel Plugin Scope
@@ -362,13 +450,13 @@ override fun onDisable() {
 
 ### 2. Use the Right Dispatcher
 
-| Task Type | Dispatcher |
-|-----------|-----------|
-| Entity/block modification | `world.dispatcher` |
-| Database queries | `HytaleDispatchers.io` |
-| File I/O | `HytaleDispatchers.io` |
-| CPU computation | `HytaleDispatchers.async` |
-| Network requests | `HytaleDispatchers.io` |
+| Task Type                 | Dispatcher                |
+| ------------------------- | ------------------------- |
+| Entity/block modification | `world.dispatcher`        |
+| Database queries          | `HytaleDispatchers.io`    |
+| File I/O                  | `HytaleDispatchers.io`    |
+| CPU computation           | `HytaleDispatchers.async` |
+| Network requests          | `HytaleDispatchers.io`    |
 
 ### 3. Never Block the World Thread
 
@@ -420,7 +508,7 @@ world.launch {
     // Child coroutines are automatically cancelled if parent is cancelled
     val job1 = launch { subtask1() }
     val job2 = launch { subtask2() }
-    
+
     // Wait for both
     job1.join()
     job2.join()
