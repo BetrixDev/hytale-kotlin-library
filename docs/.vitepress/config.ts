@@ -25,6 +25,7 @@ export default defineConfig({
           text: 'Core Features',
           items: [
             { text: 'Commands', link: '/guide/commands' },
+            { text: 'Coroutines', link: '/guide/coroutines' },
             { text: 'ECS (Entities)', link: '/guide/ecs' },
             { text: 'Events', link: '/guide/events' },
             { text: 'Interactions', link: '/guide/interactions' },

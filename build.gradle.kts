@@ -39,6 +39,9 @@ dependencies {
     
     // Kotlin standard library
     implementation(kotlin("stdlib"))
+    
+    // Kotlin coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
 }
 
 java {
