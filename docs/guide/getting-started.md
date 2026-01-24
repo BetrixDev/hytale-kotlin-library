@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.BetrixDev:hytale-kotlin-library:v0.1.0")
+    implementation("com.github.BetrixDev:hytale-kotlin-library:v0.0.2")
     compileOnly(files("path/to/HytaleServer.jar"))
 }
 ```
@@ -42,7 +42,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.BetrixDev:hytale-kotlin-library:v0.1.0'
+    implementation 'com.github.BetrixDev:hytale-kotlin-library:v0.0.2'
     compileOnly files('path/to/HytaleServer.jar')
 }
 ```
@@ -61,7 +61,7 @@ dependencies {
     <dependency>
         <groupId>com.github.BetrixDev</groupId>
         <artifactId>hytale-kotlin-library</artifactId>
-        <version>v0.1.0</version>
+        <version>v0.0.2</version>
     </dependency>
 </dependencies>
 ```
@@ -119,7 +119,7 @@ import dev.betrix.hytale.kotlin.events.*
 import dev.betrix.hytale.kotlin.core.msg
 
 class MyPlugin : JavaPlugin() {
-    
+
     override fun onLoad() {
         // Register a simple command
         registerCommand(
@@ -129,7 +129,7 @@ class MyPlugin : JavaPlugin() {
                 }
             }
         )
-        
+
         logger.info("MyPlugin loaded!")
     }
 }
@@ -140,6 +140,7 @@ class MyPlugin : JavaPlugin() {
 The Hytale server uses an **Entity-Component-System (ECS)** architecture. Understanding this is crucial for effective plugin development:
 
 ### Components
+
 Data containers attached to entities. They hold state but no logic.
 
 ```kotlin
@@ -151,14 +152,15 @@ class MatchComponent : Component<EntityStore>() {
 ```
 
 ### Systems
+
 Process entities with specific components each tick.
 
 ```kotlin
 class MatchTickSystem(
     private val matchType: ComponentType<EntityStore, MatchComponent>
 ) : TypedEntitySystem(matchType) {
-    
-    override fun tick(dt: Float, index: Int, chunk: ArchetypeChunk<EntityStore>, 
+
+    override fun tick(dt: Float, index: Int, chunk: ArchetypeChunk<EntityStore>,
                       store: Store<EntityStore>, buffer: CommandBuffer<EntityStore>) {
         val match = chunk.getComponent(index, matchType) ?: return
         // Update match state...
@@ -167,6 +169,7 @@ class MatchTickSystem(
 ```
 
 ### Events
+
 Notifications about things happening in the game.
 
 ```kotlin
