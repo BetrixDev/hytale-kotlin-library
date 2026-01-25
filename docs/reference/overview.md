@@ -201,6 +201,57 @@ class MySystem : TypedEntitySystem<ComponentA, ComponentB>()
 
 ---
 
+## Coroutines
+
+**Package:** `dev.betrix.hytale.kotlin.coroutines`
+
+### Plugin Extensions
+
+| Extension | Signature | Description |
+|-----------|-----------|-------------|
+| `launch` | `JavaPlugin.launch(context?, start?, block)` | Launch coroutine in plugin scope |
+| `async` | `JavaPlugin.async(context?, start?, block): Deferred<T>` | Launch async coroutine returning a result |
+| `launchAsync` | `JavaPlugin.launchAsync(context?, block)` | Launch on CPU background thread pool |
+| `launchIO` | `JavaPlugin.launchIO(context?, block)` | Launch for I/O operations |
+| `pluginScope` | `JavaPlugin.pluginScope: CoroutineScope` | Get plugin's coroutine scope |
+| `cancelPluginScope` | `JavaPlugin.cancelPluginScope(message?)` | Cancel all plugin coroutines |
+
+### World Extensions
+
+| Extension | Signature | Description |
+|-----------|-----------|-------------|
+| `launch` | `World.launch(context?, start?, block)` | Launch coroutine on world thread |
+| `async` | `World.async(context?, start?, block): Deferred<T>` | Launch async on world thread |
+| `withWorld` | `World.withWorld(block): T` | Switch to world thread temporarily |
+| `runOnWorld` | `World.runOnWorld(block): T` | Execute synchronously on world thread |
+| `dispatcher` | `World.dispatcher: CoroutineDispatcher` | Get world thread dispatcher |
+
+### Dispatchers
+
+**HytaleDispatchers** provides execution contexts:
+
+| Dispatcher | Description |
+|-----------|-------------|
+| `HytaleDispatchers.async` | CPU-bound background work (uses Dispatchers.Default) |
+| `HytaleDispatchers.io` | I/O operations like database/file access |
+| `HytaleDispatchers.scheduled` | Scheduled tasks (single-threaded executor) |
+
+### Tick Utilities
+
+| Function/Property | Description |
+|-----------|-------------|
+| `Int.ticks: Duration` | Convert ticks to duration (30 TPS) |
+| `Long.ticks: Duration` | Convert ticks to duration (30 TPS) |
+| `Double.ticks: Duration` | Convert ticks to duration (30 TPS) |
+| `delayTicks(ticks)` | Suspend for specified ticks |
+| `repeatTicks(ticks, action)` | Execute action for N ticks |
+| `repeatEvery(interval, action)` | Repeat action indefinitely with delay |
+| `repeatEveryTicks(ticks, action)` | Repeat action every N ticks |
+| `TICK_DURATION` | Duration of one tick (~33.33ms at 30 TPS) |
+| `DEFAULT_TPS` | Constant value of 30 |
+
+---
+
 ## Core Utilities
 
 **Package:** `dev.betrix.hytale.kotlin.core`
@@ -240,6 +291,9 @@ import dev.betrix.hytale.kotlin.ecs.system.*
 
 // Events
 import dev.betrix.hytale.kotlin.events.*
+
+// Coroutines
+import dev.betrix.hytale.kotlin.coroutines.*
 
 // UI Pages
 import dev.betrix.hytale.kotlin.ui.pages.*

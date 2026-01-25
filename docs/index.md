@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: "Hytale Kotlin Library"
-  text: "Kotlin DSLs for Hytale Plugin Development"
-  tagline: Reduce boilerplate, increase type safety, and write cleaner server plugins
+  text: ""
+  tagline: Reduce boilerplate, increase type safety, and write cleaner server plugins, with speed
   actions:
     - theme: brand
       text: Getting Started
@@ -51,19 +51,19 @@ Here's a complete example showing how the library simplifies common tasks:
 
 ```kotlin
 class MyPlugin : JavaPlugin() {
-    
+
     private lateinit var matchType: ComponentType<EntityStore, MatchComponent>
-    
+
     override fun onLoad() {
         // Register components with reified generics
         matchType = registerComponent("Match", MatchComponent.CODEC)
-        
+
         // Register systems with DSL
         registerSystems {
             +MatchTickSystem(matchType)
             +ScoreboardUpdateSystem(matchType)
         }
-        
+
         // Register commands with DSL
         registerCommands {
             +playerCommand("queue", "Join the matchmaking queue") {
@@ -73,7 +73,7 @@ class MyPlugin : JavaPlugin() {
                 }
             }
         }
-        
+
         // Register events with reified generics
         registerEvents {
             global<AllWorldsLoadedEvent> { initializeServices() }
