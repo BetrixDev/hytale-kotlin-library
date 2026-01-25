@@ -35,9 +35,9 @@ for await (const filePath of markdownFilesGlob.scan()) {
 }
 
 const server = new McpServer({
-  name: "Hytale Kotlin Library Documentation MCP Server",
+  name: "Hytale.kt Documentation MCP Server",
   version: "1.0.0",
-  description: "Documentation for the Hytale Kotlin Library",
+  description: "Documentation for Hytale.kt",
   websiteUrl: "https://hytale-kotlin-library.vercel.app",
 });
 

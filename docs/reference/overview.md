@@ -1,11 +1,11 @@
 ---
 title: Complete API Reference Documentation
-description: Quick reference for all extensions and utilities provided by the Hytale Kotlin Library
+description: Quick reference for all extensions and utilities provided by the Hytale.kt
 ---
 
 # API Reference
 
-Quick reference for all extensions and utilities provided by the Hytale Kotlin Library.
+Quick reference for all extensions and utilities provided by Hytale.kt.
 
 ## Commands
 

@@ -5,7 +5,7 @@ description: Kotlin coroutine integration for async and world-thread operations
 
 # Coroutines
 
-The Hytale Kotlin Library provides first-class coroutine support, making it easy to write async code that integrates seamlessly with Hytale's threading model.
+Hytale.kt provides first-class coroutine support, making it easy to write async code that integrates seamlessly with Hytale's threading model.
 
 ## Overview
 

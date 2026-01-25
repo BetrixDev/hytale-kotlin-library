@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Hytale Kotlin Library",
+  title: "Hytale.kt",
   description: "Kotlin extensions and DSLs for Hytale server plugin development",
   appearance: true,
   themeConfig: {

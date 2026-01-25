@@ -110,7 +110,7 @@ Write-Step "Creating GitHub release..."
 
 # Build release notes (use single quotes to avoid backtick issues)
 $releaseNotes = @"
-## Hytale Kotlin Library $Version
+## Hytale.kt $Version
 
 ### Installation via JitPack
 

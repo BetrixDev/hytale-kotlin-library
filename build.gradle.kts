@@ -85,7 +85,7 @@ publishing {
             from(components["java"])
             
             pom {
-                name.set("Hytale Kotlin Library")
+                name.set("Hytale.kt")
                 description.set("Kotlin extensions and DSLs for Hytale server plugin development")
             }
         }

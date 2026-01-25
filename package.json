@@ -1,5 +1,5 @@
 {
-  "name": "hytale-kotlin-library",
+  "name": "hytaleKt",
   "module": "index.ts",
   "type": "module",
   "private": true,

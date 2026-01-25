@@ -1,1 +1,1 @@
-rootProject.name = "hytale-kotlin-library"
+rootProject.name = "hytaleKt"

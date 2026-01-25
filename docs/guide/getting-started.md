@@ -1,11 +1,11 @@
 ---
 title: Installation and Setup Guide
-description: Setup guide and introduction to using the Hytale Kotlin Library
+description: Setup guide and introduction to using Hytale.kt
 ---
 
 # Getting Started
 
-This guide will walk you through setting up and using the Hytale Kotlin Library in your server plugin project.
+This guide will walk you through setting up and using Hytale.kt in your server plugin project.
 
 ## Prerequisites
 

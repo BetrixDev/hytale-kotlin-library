@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: "Hytale Kotlin Library"
+  name: "Hytale.kt"
   text: ""
   tagline: Reduce boilerplate, increase type safety, and write cleaner server plugins, with speed
   actions:
@@ -28,7 +28,7 @@ features:
     details: Explicit nullability throughout - getOrNull, require, and ifProvided patterns
 ---
 
-## What is Hytale Kotlin Library?
+## What is Hytale.kt?
 
 This library provides Kotlin extensions and DSLs that wrap Hytale's Java server API, making plugin development more concise and type-safe. It doesn't replace the Hytale API - it enhances it with idiomatic Kotlin patterns.
 
