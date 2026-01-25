@@ -1,4 +1,4 @@
-# hytale-kotlin-library
+# Hytale.kt
 
 [![](https://jitpack.io/v/BetrixDev/hytale-kotlin-library.svg)](https://jitpack.io/#BetrixDev/hytale-kotlin-library)
 
@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.BetrixDev:hytale-kotlin-library:v0.1.0")
+    implementation("com.github.BetrixDev:hytaleKt:VERSION")
     compileOnly(files("path/to/HytaleServer.jar"))
 }
 ```
@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.BetrixDev:hytale-kotlin-library:v0.1.0'
+    implementation 'com.github.BetrixDev:hytaleKt:VERSION'
     compileOnly files('path/to/HytaleServer.jar')
 }
 ```
@@ -50,8 +50,8 @@ dependencies {
 <dependencies>
     <dependency>
         <groupId>com.github.BetrixDev</groupId>
-        <artifactId>hytale-kotlin-library</artifactId>
-        <version>v0.1.0</version>
+        <artifactId>hytaleKt</artifactId>
+        <version>VERSION</version>
     </dependency>
 </dependencies>
 ```
