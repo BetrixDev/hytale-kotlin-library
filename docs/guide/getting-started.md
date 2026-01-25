@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.BetrixDev:hytale-kotlin-library:v0.0.2")
+    implementation("com.github.BetrixDev:hytale-kotlin-library:v0.0.3")
     compileOnly(files("path/to/HytaleServer.jar"))
 }
 ```
@@ -42,7 +42,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.BetrixDev:hytale-kotlin-library:v0.0.2'
+    implementation 'com.github.BetrixDev:hytale-kotlin-library:v0.0.3'
     compileOnly files('path/to/HytaleServer.jar')
 }
 ```
@@ -61,7 +61,7 @@ dependencies {
     <dependency>
         <groupId>com.github.BetrixDev</groupId>
         <artifactId>hytale-kotlin-library</artifactId>
-        <version>v0.0.2</version>
+        <version>v0.0.3</version>
     </dependency>
 </dependencies>
 ```
