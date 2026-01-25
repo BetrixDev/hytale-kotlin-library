@@ -41,6 +41,29 @@ function Update-VersionInProperties {
     Set-Content "gradle.properties" -Value $content.TrimEnd()
 }
 
+function Get-PreviousTag {
+    $tags = git tag --sort=-v:refname 2>$null
+    if ($tags) {
+        return ($tags | Select-Object -First 1)
+    }
+    return $null
+}
+
+function Get-CommitsSinceTag {
+    param([string]$Tag)
+    
+    if ($Tag) {
+        $commits = git log "$Tag..HEAD" --pretty=format:"- %s (%h)" --no-merges 2>$null
+    } else {
+        $commits = git log --pretty=format:"- %s (%h)" --no-merges 2>$null
+    }
+    
+    if ($commits) {
+        return $commits -join "`n"
+    }
+    return $null
+}
+
 # Ensure we're in the project root
 if (-not (Test-Path "build.gradle.kts")) {
     throw "Must be run from project root (where build.gradle.kts is located)"
@@ -66,12 +89,25 @@ if ($existingTag) {
     throw "Tag $tagName already exists. Use a different version."
 }
 
+# Get previous tag and commits
+$previousTag = Get-PreviousTag
+$commitList = Get-CommitsSinceTag -Tag $previousTag
+
 if ($DryRun) {
     Write-Host "[DRY RUN] Would perform the following:" -ForegroundColor Yellow
     Write-Host "  - Build JAR with version $Version"
     Write-Host "  - Create git tag: $tagName"
     Write-Host "  - Push tag to origin"
     Write-Host "  - Create GitHub release with JAR artifacts"
+    if ($previousTag) {
+        Write-Host "  - Previous tag: $previousTag"
+    } else {
+        Write-Host "  - No previous tag found (initial release)"
+    }
+    if ($commitList) {
+        Write-Host "`n  Commits to include:" -ForegroundColor Yellow
+        Write-Host $commitList
+    }
     exit 0
 }
 
@@ -108,9 +144,22 @@ git push origin $tagName
 # Create GitHub release using gh CLI
 Write-Step "Creating GitHub release..."
 
+# Build changelog section
+$changelogSection = ""
+if ($commitList) {
+    $changelogSection = @"
+
+### What's Changed
+$commitList
+"@
+    if ($previousTag) {
+        $changelogSection += "`n`n**Full Changelog**: https://github.com/BetrixDev/hytale-kotlin-library/compare/$previousTag...$tagName"
+    }
+}
+
 # Build release notes (use single quotes to avoid backtick issues)
 $releaseNotes = @"
-## Hytale.kt $Version
+$changelogSection
 
 ### Installation via JitPack
 
@@ -119,11 +168,11 @@ Add the JitPack repository and dependency to your build.gradle.kts:
 ``````kotlin
 repositories {
     mavenCentral()
-    maven("https://jitpack.io")
+    maven('https://jitpack.io')
 }
 
 dependencies {
-    implementation("com.github.BetrixDev:hytale-kotlin-library:$tagName")
+    implementation('com.github.BetrixDev:hytale-kotlin-library:$tagName')
 }
 ``````
 
